@@ -18,28 +18,15 @@ Widget getDrawer(context) {
           child: Text('Drawer Header'),
         ),
         ListTile(
-          title: const Text('Page 1'),
-          onTap: () {
-            // Update the state of the app.
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const FirstRoute()),
-                (route) => false);
-          },
-        ),
+            title: const Text('Page 1'),
+            onTap: () {
+              // Update the state of the app.
+              Navigator.popAndPushNamed(context, "/");
+            }),
         ListTile(
           title: const Text('Page 2'),
           onTap: () {
-            // Update the state of the app.
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => const SecondRoute()),
-                (route) => false);
-          },
-        ),
-        ListTile(
-          title: const Text('Apply Filter'),
-          onTap: () {
-            // Update the state of the app.
-            Navigator.pop(context);
+            Navigator.popAndPushNamed(context, "/second");
           },
         ),
       ],
