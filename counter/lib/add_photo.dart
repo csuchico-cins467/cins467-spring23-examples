@@ -29,6 +29,7 @@ class _AddPhotoState extends State<AddPhoto> {
     super.dispose();
   }
 
+  @override
   void initState() {
     super.initState();
     _determinePosition().then((value) => setState(() {
