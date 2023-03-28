@@ -2,13 +2,72 @@
 
 image: cirrusci/flutter
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
 stages:
   - test # All jobs related for testing such as Unit Test
   - lint # All jobs related to flutter analyze or other linting
   - build # All jobs related for building app for Web and Android
+  - deploy # All jobs related to deployment (for us just web)
 
 flutter_test: # name of stage
   stage: test # type of stage
   script:
     - cd counter_test # change directory to the test project
     - flutter test # Run Flutter test
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
+
+flutter_lint: # name of stage
+  stage: lint # type of stage
+  script:
+    - cd counter_test # change directory to the test project
+    - flutter analyze # Run Flutter analyze
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
+
+flutter_build_android: # name of stage
+  stage: build # type of stage
+  before_script:
+    - cd counter_test # change directory to the test project
+    - flutter packages get # Get flutter packages
+    - flutter clean # clean any artifacts up
+  script:
+    - flutter build apk
+  artifacts:
+    paths:
+      - counter_test/build/app/outputs/flutter-apk/app-release.apk
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
+
+flutter_build_web: # name of stage
+  stage: build # type of stage
+  before_script:
+    - cd counter_test # change directory to the test project
+    - flutter packages get # Get flutter packages
+    - flutter clean # clean any artifacts up
+  script:
+    - flutter build web
+  artifacts:
+    paths:
+      - counter_test/build/web/*
+  rules:
+    - if: $CI_COMMIT_BRANCH != "main"
+
+pages: # name of stage
+  stage: deploy # type of stage
+  before_script:
+    - cd counter_test # change directory to the test project
+    - flutter packages get # Get flutter packages
+    - flutter clean # clean any artifacts up
+  script:
+    - flutter build web
+    - cp -r build/web ../public
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+
