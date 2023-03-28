@@ -12,3 +12,31 @@ flutter_test: # name of stage
   script:
     - cd counter_test # change directory to the test project
     - flutter test # Run Flutter test
+
+flutter_lint: # name of stage
+  stage: lint # type of stage
+  script:
+    - cd counter_test # change directory to the test project
+    - flutter analyze # Run Flutter analyze
+
+flutter_build_android: # name of stage
+  stage: build # type of stage
+  before_script:
+    - cd counter_test # change directory to the test project
+    - flutter packages get # Get flutter packages
+    - flutter clean # clean any artifacts up
+  script:
+    - flutter build apk
+  artifacts:
+    - counter_test/build/app/outputs/flutter-apk/app-release.apk
+
+flutter_build_web: # name of stage
+  stage: build # type of stage
+  before_script:
+    - cd counter_test # change directory to the test project
+    - flutter packages get # Get flutter packages
+    - flutter clean # clean any artifacts up
+  script:
+    - flutter build web
+  artifacts:
+    - counter_test/build/web/*
