@@ -63,7 +63,7 @@ pages: # name of stage
     - flutter packages get # Get flutter packages
     - flutter clean # clean any artifacts up
   script:
-    - flutter build web --base-href "CSUC-CINS467/cins467-spring23-examples/cins467-spring23-examples/"
+    - flutter build web --base-href "/CSUC-CINS467/cins467-spring23-examples/cins467-spring23-examples/"
     - cp -r build/web ../public
   artifacts:
     paths:
