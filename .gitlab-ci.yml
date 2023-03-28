@@ -28,19 +28,19 @@ flutter_lint: # name of stage
   rules:
     - if: $CI_COMMIT_BRANCH != "main"
 
-flutter_build_android: # name of stage
-  stage: build # type of stage
-  before_script:
-    - cd counter_test # change directory to the test project
-    - flutter packages get # Get flutter packages
-    - flutter clean # clean any artifacts up
-  script:
-    - flutter build apk
-  artifacts:
-    paths:
-      - counter_test/build/app/outputs/flutter-apk/app-release.apk
-  rules:
-    - if: $CI_COMMIT_BRANCH != "main"
+# flutter_build_android: # name of stage
+#   stage: build # type of stage
+#   before_script:
+#     - cd counter_test # change directory to the test project
+#     - flutter packages get # Get flutter packages
+#     - flutter clean # clean any artifacts up
+#   script:
+#     - flutter build apk
+#   artifacts:
+#     paths:
+#       - counter_test/build/app/outputs/flutter-apk/app-release.apk
+#   rules:
+#     - if: $CI_COMMIT_BRANCH != "main"
 
 flutter_build_web: # name of stage
   stage: build # type of stage
@@ -63,7 +63,7 @@ pages: # name of stage
     - flutter packages get # Get flutter packages
     - flutter clean # clean any artifacts up
   script:
-    - flutter build web
+    - flutter build web --base-href "CSUC-CINS467/cins467-spring23-examples/cins467-spring23-examples/"
     - cp -r build/web ../public
   artifacts:
     paths:
