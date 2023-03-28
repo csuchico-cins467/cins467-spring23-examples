@@ -1,0 +1,14 @@
+#Inspired by: https://medium.com/kinandcartacreated/setup-a-flutter-ci-cd-with-gitlab-ci-part-1-8d40b7a3b3dc
+
+image: cirrusci/flutter
+
+stages:
+  - test # All jobs related for testing such as Unit Test
+  - lint # All jobs related to flutter analyze or other linting
+  - build # All jobs related for building app for Web and Android
+
+flutter_test: # name of stage
+  stage: test # type of stage
+  script:
+    - cd counter_test # change directory to the test project
+    - flutter test # Run Flutter test
