@@ -28,7 +28,8 @@ flutter_build_android: # name of stage
   script:
     - flutter build apk
   artifacts:
-    - counter_test/build/app/outputs/flutter-apk/app-release.apk
+    paths:
+      - counter_test/build/app/outputs/flutter-apk/app-release.apk
 
 flutter_build_web: # name of stage
   stage: build # type of stage
@@ -39,4 +40,5 @@ flutter_build_web: # name of stage
   script:
     - flutter build web
   artifacts:
-    - counter_test/build/web/*
+    paths:
+      - counter_test/build/web/*
