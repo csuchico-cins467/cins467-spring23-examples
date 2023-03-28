@@ -49,7 +49,7 @@ flutter_build_web: # name of stage
     - flutter packages get # Get flutter packages
     - flutter clean # clean any artifacts up
   script:
-    - flutter build web
+    - flutter build web --base-href "/CSUC-CINS467/cins467-spring23-examples/cins467-spring23-examples/"
   artifacts:
     paths:
       - counter_test/build/web/*
